@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>SignUp</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+</head>
+
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                SignUp
+            </h1>
+            <form th:action="@{/user/register}" method="post">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="form_table">
+                    <tr>
+                        <td valign="middle" align="right">
+                            Email:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="email_address" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            password:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="password" class="inputgri" name="password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                             Confirm password:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="password" class="inputgri" name="confirmPwd" />
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <input type="submit" class="button" value="Sign Up &raquo;" />
+                    <a href="menu">Already have an account? Click here to Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
