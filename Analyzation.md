@@ -19,11 +19,11 @@
 
 ### table users
 
-1. user id(primary key)(auto increase)
-2. email address(unique)
+1. user_id(primary key)(auto increase)
+2. email_address(unique)
 3. password
-4. banned(date)
-5. verification code
+4. banned_until(date)
+5. verification_code
 
 ### table posts
 
