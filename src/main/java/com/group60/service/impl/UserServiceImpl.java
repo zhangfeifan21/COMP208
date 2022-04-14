@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -17,6 +19,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Override
+    public User login(String email_address, String password) {
+        User user = userDao.findByEmail(email_address);
+        if(ObjectUtils.isEmpty(user)) throw new RuntimeException("email doesn't exists");
+        if(!user.getPassword().equals(password)) throw new RuntimeException("wrong password");
+        return user;
     }
 
     @Override

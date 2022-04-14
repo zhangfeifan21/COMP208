@@ -9,15 +9,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("user")
 public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
+
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+    }
+
+    @RequestMapping("login")
+    public String login(String email_address, String password, HttpSession session){
+        log.debug("email_address: {}, password: {} Got for login",email_address,password);
+        try {
+            User user = userService.login(email_address, password);
+            session.setAttribute("user",user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/register";
+        }
+        return "redirect:/demo";
     }
 
     @RequestMapping("register")
