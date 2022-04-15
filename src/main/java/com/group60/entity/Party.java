@@ -4,6 +4,7 @@ package com.group60.entity;
 import java.util.Date;
 
 public class Party {
+    private int party_id;
     private String title;
     private String description;
     private int max_member;
@@ -15,14 +16,23 @@ public class Party {
     public Party() {
     }
 
-    public Party(String title, String description, int maximum_member, int current_member, String place, int belongs_to, Date start_time) {
+    public Party(int party_id, String title, String description, int max_member, int current_member, String place, int belongs_to, Date start_time) {
+        this.party_id = party_id;
         this.title = title;
         this.description = description;
-        this.max_member = maximum_member;
+        this.max_member = max_member;
         this.current_member = current_member;
         this.place = place;
         this.belongs_to = belongs_to;
         this.start_time = start_time;
+    }
+
+    public int getParty_id() {
+        return party_id;
+    }
+
+    public void setParty_id(int party_id) {
+        this.party_id = party_id;
     }
 
     public String getTitle() {

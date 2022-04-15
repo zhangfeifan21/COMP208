@@ -11,7 +11,7 @@
         values(#{user_id}, #{email_address}, #{password})
     </insert>
     <select id="lists" resultType="Party">
-        select title, description, max_member, current_member, place, start_time, belongs_to
+        select party_id, title, description, max_member, current_member, place, start_time, belongs_to
         from `parties`
     </select>
 </mapper>
