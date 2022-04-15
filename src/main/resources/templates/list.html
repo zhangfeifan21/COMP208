@@ -1,0 +1,109 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
+                    <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a>
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                Welcome <span th:if="${session.user!=null}" th:text="${session.user.username}"></span>
+                <span th:if="${session.user==null}" >Guest (Please sign in first)</span>!
+            </h1>
+            <table class="table">
+                <tr class="table_header">
+                    <td>
+                        party_id
+                    </td>
+                    <td>
+                        title
+                    </td>
+                    <td>
+                        description
+                    </td>
+                    <td>
+                        date
+                    </td>
+                    <td>
+                        time
+                    </td>
+                    <td>
+                        place
+                    </td>
+                    <td>
+                        current
+                    </td>
+                </tr>
+                <tr th:each="party,state:${partyList}"  th:class="${state.odd?'row1':'row2'}">
+                    <td>
+                        <span th:text="${party.party_id}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.title}"></span>
+                    </td>
+                    <td>
+                        <span th:src="${party.description}" width="60"></span>
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.timer}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.place}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.current} + '/' + ${party.maximum}"></span>
+                    </td>
+                    <td>
+                        <a href="javascript:;" th:onclick="'deleteEmployee('+${employee.id}+')'">删除</a>
+                        <!--								<a th:href="@{/employee/detail?id=}+${employee.id}+'&name='+${employee.name}">更新</a>-->
+                        <!--								<a th:href="@{/employee/detail(id=${employee.id},name=${employee.name})}">更新</a>-->
+                        <a th:href="@{/employee/detail(id=${employee.id})}">更新</a>
+
+                    </td>
+                </tr>
+                <script>
+                    function deleteEmployee(id){
+                        console.log(id);
+                        if(window.confirm('确定要删除这条记录吗?')){
+                            location.href='[[@{/employee/delete?id=}]]'+id;
+                        }
+                    }
+                </script>
+            </table>
+            <p>
+                <input type="button" class="button" value="添加" onclick="addEmp()"/>
+                <script>
+                    function addEmp(){
+                        location.href = '[[@{/addEmp}]]';
+                    }
+                </script>
+            </p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

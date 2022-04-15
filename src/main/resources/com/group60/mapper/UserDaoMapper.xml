@@ -3,11 +3,15 @@
 <mapper namespace="com.group60.dao.UserDao">
 
     <select id="findByEmail" parameterType="String" resultType="User">
-        select email_address,password from `users`
+        select email_address, password from `users`
         where email_address = #{email_address}
     </select>
     <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="user_id">
         insert into `users` (user_id, email_address, password)
         values(#{user_id}, #{email_address}, #{password})
     </insert>
+    <select id="lists" resultType="Party">
+        select title, description, max_member, current_member, place, start_time, belongs_to
+        from `parties`
+    </select>
 </mapper>

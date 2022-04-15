@@ -1,6 +1,7 @@
 package com.group60.service.impl;
 
 import com.group60.dao.UserDao;
+import com.group60.entity.Party;
 import com.group60.entity.User;
 import com.group60.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 @Transactional
@@ -34,5 +36,10 @@ public class UserServiceImpl implements UserService {
         User userDb = userDao.findByEmail(user.getEmail_address());
         if(!ObjectUtils.isEmpty(userDb)) throw new RuntimeException("email already exists");
         userDao.save(user);
+    }
+
+    @Override
+    public List<Party> lists() {
+        return userDao.lists();
     }
 }

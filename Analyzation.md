@@ -31,3 +31,33 @@
 2. body
 3. belongs to(ref: user id)
 
+### SQL queries
+create table users
+(
+user_id           int auto_increment
+primary key,
+email_address     varchar(50) not null,
+password          varchar(20) not null,
+verification_code int         null,
+banned_until      datetime    null,
+constraint users_email_address_uindex
+unique (email_address)
+);
+
+create table parties
+(
+belongs_to     int           not null,
+title          varchar(50)   not null,
+description    varchar(2000) null,
+max_member     int           null,
+current_member int           null,
+place          varchar(100)  null,
+start_time     datetime      null,
+party_id       int auto_increment
+primary key,
+constraint posts_users_user_id_fk
+foreign key (belongs_to) references users (user_id)
+on update cascade on delete cascade
+);
+
+
