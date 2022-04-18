@@ -35,11 +35,16 @@ public class UserServiceImpl implements UserService {
     public void register(User user) {
         User userDb = userDao.findByEmail(user.getEmail_address());
         if(!ObjectUtils.isEmpty(userDb)) throw new RuntimeException("email already exists");
-        userDao.save(user);
+        userDao.saveUser(user);
     }
 
     @Override
     public List<Party> lists() {
         return userDao.lists();
+    }
+
+    @Override
+    public void saveParty(Party party, int user_id) {
+        userDao.saveParty(party, user_id);
     }
 }

@@ -1,0 +1,86 @@
+<html xmlns:th="http://www.thymealf.org">
+<head>
+    <title>addParty</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css"
+          href="css/style.css" />
+</head>
+
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                Hold a party!
+            </h1>
+            <form th:action="@{user/saveparty}" method="post" enctype="multipart/form-data">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="form_table">
+                    <tr>
+                        <td valign="middle" align="right">
+                            Title:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="title" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Description:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="description" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Time:
+                        </td>
+<!--                        <td valign="middle" align="left">-->
+<!--                            <input type="datetime-local" class="inputgri" name="start_time" />-->
+<!--                        </td>-->
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Place:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="place" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Maximum participants:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="max_member" />
+                        </td>
+                    </tr>
+                </table>
+                <p>
+                    <input type="submit" class="button" value="Create" />
+                    <a href="user/partylist">Go back</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

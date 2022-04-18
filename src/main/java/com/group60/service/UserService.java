@@ -9,4 +9,5 @@ public interface UserService {
     User login(String email_address, String password);
     void register(User user);
     List<Party> lists();
+    void saveParty(Party party, int user_id);
 }

@@ -28,7 +28,7 @@
             <p id="whereami">
             </p>
             <h1>
-                Welcome <span th:if="${session.user!=null}" th:text="${session.user.username}"></span>
+                Welcome <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>
                 <span th:if="${session.user==null}" >Guest (Please sign in first)</span>!
             </h1>
             <table class="table">
@@ -46,13 +46,13 @@
                         date
                     </td>
                     <td>
-                        time
-                    </td>
-                    <td>
                         place
                     </td>
                     <td>
-                        current
+                        members
+                    </td>
+                    <td>
+                        holder_id
                     </td>
                 </tr>
                 <tr th:each="party,state:${parties}"  th:class="${state.odd?'row1':'row2'}">
@@ -80,13 +80,13 @@
                 </tr>
             </table>
             <p>
-                <input type="button" class="button" value="添加" onclick="addEmp()"/>
+                <input type="button" class="button" value="add" onclick="addParty()"/>
                 <script>
-                    function addEmp(){
-                        location.href = '[[@{/addEmp}]]';
+                    function addParty(){
+                        location.href = '[[@{/addParty}]]';
                     }
                 </script>
-            </p>
+            </p >
         </div>
     </div>
 </div>
