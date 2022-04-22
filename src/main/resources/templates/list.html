@@ -54,6 +54,8 @@
                     <td>
                         holder_id
                     </td>
+                    <td>
+                    </td>
                 </tr>
                 <tr th:each="party,state:${parties}"  th:class="${state.odd?'row1':'row2'}">
                     <td>
@@ -76,6 +78,16 @@
                     </td>
                     <td>
                         <span th:text="${party.belongs_to}"></span>
+                    </td>
+                    <td>
+                        <p>
+                            <input type="button" class="button" value="add" onclick="joinParty()"/>
+                            <script>
+                                function joinParty(){
+                                    location.href = '[[@{/joinParty}]]';
+                                }
+                            </script>
+                        </p>
                     </td>
                 </tr>
             </table>
