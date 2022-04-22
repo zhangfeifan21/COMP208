@@ -60,4 +60,15 @@ foreign key (belongs_to) references users (user_id)
 on update cascade on delete cascade
 );
 
+create table users_parties
+(
+user_id  int null,
+party_id int null,
+constraint users_parties_parties_party_id_fk
+foreign key (party_id) references parties (party_id)
+on update cascade on delete cascade,
+constraint users_parties_users_user_id_fk
+foreign key (user_id) references users (user_id)
+on update cascade on delete cascade
+);
 
