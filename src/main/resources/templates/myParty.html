@@ -1,0 +1,100 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
+                    <br />
+                    <a th:if="${session.user!=null}" th:href="@{/list}">Back to party list</a>
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                <span th:if="${session.user!=null}" th:text="${session.user}"></span>'s parties !
+            </h1>
+            <table class="table">
+                <tr class="table_header">
+                    <td>
+                        party_id
+                    </td>
+                    <td>
+                        title
+                    </td>
+                    <td>
+                        description
+                    </td>
+                    <td>
+                        date
+                    </td>
+                    <td>
+                        time
+                    </td>
+                    <td>
+                        place
+                    </td>
+                    <td>
+                        current
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr th:each="party,state:${myList}"  th:class="${state.odd?'row1':'row2'}">
+                    <td>
+                        <span th:text="${party.party_id}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.title}"></span>
+                    </td>
+                    <td>
+                        <span th:src="${party.description}" width="60"></span>
+                    </td>
+                    <td>
+                        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.timer}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.place}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.current} + '/' + ${party.maximum}"></span>
+                    </td>
+                    <p>
+                    <td>
+                        <input type="button" class="button" value="quit" onclick="quit()"/>
+                    </td>
+                    <script>
+                        function quit(){
+                            location.href = '[[@{/quit}]]';
+                        }
+                    </script>
+                    </p>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
