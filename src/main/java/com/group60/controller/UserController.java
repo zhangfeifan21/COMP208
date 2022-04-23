@@ -25,6 +25,21 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+    @RequestMapping("logout")
+    public String logout(HttpSession session){
+//        session.setAttribute("user", null);
+        session.invalidate();
+        return "redirect:/";
+    }
+
+    @RequestMapping("myparty")
+    public String myParty(Model model, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        log.debug("printing my party list... with user: {}", user);
+        List<Party> myParties = userService.listParty(user.getUser_id());
+        model.addAttribute("myparties", myParties);
+        return "myParty";
+    }
 
     @RequestMapping("saveparty")
     public String saveParty(Party party, HttpSession session){

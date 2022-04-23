@@ -18,4 +18,8 @@
         insert into `parties` (party_id, title, description, max_member, current_member, place, belongs_to)
         values (#{party.party_id}, #{party.title}, #{party.description}, #{party.max_member}, '1', #{party.place}, #{user_id})
     </insert>
+    <select id="listParty" parameterType="int" resultType="Party">
+        select party_id, title, description, max_member, current_member, place, start_time, belongs_to
+        from `parties` as p,
+    </select>
 </mapper>

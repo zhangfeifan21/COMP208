@@ -23,6 +23,7 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+
     @Override
     public User login(String email_address, String password) {
         User user = userDao.findByEmail(email_address);
@@ -46,5 +47,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveParty(Party party, int user_id) {
         userDao.saveParty(party, user_id);
+    }
+
+    @Override
+    public List<Party> listParty(int user_id) {
+        return userDao.listParty(user_id);
     }
 }

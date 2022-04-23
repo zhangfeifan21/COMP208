@@ -12,4 +12,5 @@ public interface UserDao {
     void saveUser(User user);
     List<Party> lists();
     void saveParty(@Param("party") Party party,@Param("user_id") int user_id);
+    List<Party> listParty(int user_id);
 }

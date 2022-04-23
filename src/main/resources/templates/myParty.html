@@ -12,10 +12,9 @@
                 <p>
                     Group 60
                     <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a >
+                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
                     <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/myparty}">Manage my party</a >
-                    <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a >
+                    <a th:if="${session.user!=null}" th:href="@{/user/partylist}">Back to party list</a>
                 </p>
             </div>
             <div id="topheader">
@@ -30,8 +29,7 @@
             <p id="whereami">
             </p>
             <h1>
-                Welcome <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>
-                <span th:if="${session.user==null}" >Guest (Please sign in first)</span>!
+                <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>'s parties !
             </h1>
             <table class="table">
                 <tr class="table_header">
@@ -48,16 +46,16 @@
                         date
                     </td>
                     <td>
+                        time
+                    </td>
+                    <td>
                         place
                     </td>
                     <td>
-                        members
-                    </td>
-                    <td>
-                        holder_id
+                        current
                     </td>
                 </tr>
-                <tr th:each="party,state:${parties}"  th:class="${state.odd?'row1':'row2'}">
+                <tr th:each="party,state:${myList}"  th:class="${state.odd?'row1':'row2'}">
                     <td>
                         <span th:text="${party.party_id}"></span>
                     </td>
@@ -65,30 +63,23 @@
                         <span th:text="${party.title}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.description}" th:width="60"></span>
+                        <span th:src="${party.description}" width="60"></span>
                     </td>
                     <td>
-                        <span th:text="${#dates.format(party.start_time,'yyyy/MM/dd')}"></span>
+                        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}"></span>
+                    </td>
+                    <td>
+                        <span th:text="${party.timer}"></span>
                     </td>
                     <td>
                         <span th:text="${party.place}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.current_member} + '/' + ${party.max_member}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${party.belongs_to}"></span>
+                        <span th:text="${party.current} + '/' + ${party.maximum}"></span>
                     </td>
                 </tr>
+
             </table>
-            <p>
-                <input type="button" class="button" value="add" onclick="addParty()"/>
-                <script>
-                    function addParty(){
-                        location.href = '[[@{/addParty}]]';
-                    }
-                </script>
-            </p >
         </div>
     </div>
 </div>

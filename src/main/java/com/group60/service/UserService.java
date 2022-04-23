@@ -10,4 +10,5 @@ public interface UserService {
     void register(User user);
     List<Party> lists();
     void saveParty(Party party, int user_id);
+    List<Party> listParty(int user_id);
 }
