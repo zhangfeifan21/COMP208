@@ -82,21 +82,14 @@
                         <span th:text="${party.belongs_to}"></span>
                     </td>
                     <td>
-                        <a href="javascript:;" th:onclick="'join('+${party.party_id} + ')'">Join</a>
-                        <a href="javascript:;" th:onclick="'quit('+${party.party_id}+')'">Quit</a>
+                        <a th:if="${session.user.getUser_id() != party.belongs_to}" href="javascript:;" th:onclick="'join('+${party.party_id} + ')'">Join</a>
+                        <a th:if="${session.user.getUser_id() == party.belongs_to}">You are the holder</a>
                     </td>
                 </tr>
                 <script>
                     function join(partyId){
                         if(window.confirm('Confirm to Join')){
                             location.href='[[@{/user/joinparty?partyId=}]]' + partyId;
-                        }
-                    }
-                </script>
-                <script>
-                    function quit(partyId){
-                        if(window.confirm('Confirm to Quit')){
-                            location.href='[[@{/user/quitparty?partyId=}]]'+ partyId;
                         }
                     }
                 </script>
