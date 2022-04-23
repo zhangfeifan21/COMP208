@@ -18,8 +18,38 @@
         insert into `parties` (party_id, title, description, max_member, current_member, place, belongs_to)
         values (#{party.party_id}, #{party.title}, #{party.description}, #{party.max_member}, '1', #{party.place}, #{user_id})
     </insert>
-    <select id="listParty" parameterType="int" resultType="Party">
-        select party_id, title, description, max_member, current_member, place, start_time, belongs_to
-        from `parties` as p,
+    <select id="myParty" parameterType="int" resultType="Party">
+        select p.party_id, title, description, max_member, current_member, place, start_time, belongs_to
+        from `parties` as p, `users_parties` as up, `users` as u
+        where u.user_id = #{user_id} and u.user_id = up.user_id and p.party_id = up.party_id
+        order by p.party_id
     </select>
+    <select id="findPair" resultType="Pair">
+        select *
+        from `users_parties`
+        where party_id = #{party_id} and user_id = #{user_id}
+    </select>
+    <insert id="joinParty">
+        insert into `users_parties` (party_id, user_id)
+        values (#{party_id}, #{user_id})
+    </insert>
+    <select id="checkParty" parameterType="int" resultType="CheckMember">
+        select max_member, current_member
+        from `parties`
+        where party_id = #{party_id}
+    </select>
+    <update id="addMember" parameterType="int">
+        update `parties`
+        set current_member = current_member + '1'
+        where party_id = #{party_id}
+    </update>
+    <update id="deleteMember" parameterType="int">
+        update `parties`
+        set current_member = current_member - '1'
+        where party_id = #{party_id}
+    </update>
+    <delete id="quitParty">
+        delete from `users_parties`
+        where user_id = #{user_id} and party_id = #{party_id};
+    </delete>
 </mapper>

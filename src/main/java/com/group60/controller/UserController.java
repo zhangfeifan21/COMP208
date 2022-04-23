@@ -3,7 +3,6 @@ package com.group60.controller;
 import com.group60.entity.Party;
 import com.group60.entity.User;
 import com.group60.service.UserService;
-import com.group60.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,36 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+    @RequestMapping("quitparty")
+    public String quitParty(HttpSession session, Integer partyId){
+        log.debug("quiting party");
+        User user = (User) session.getAttribute("user");
+        log.debug("user={}, partyid={}",user,partyId);
+        try {
+            userService.quitParty(user.getUser_id(), partyId);
+        }
+        catch (RuntimeException e){
+            e.printStackTrace();
+            return "redirect:/user/partylist";
+        }
+        return "redirect:/user/partylist";
+    }
+
+    @RequestMapping("joinparty")
+    public String joinParty(HttpSession session, Integer partyId){
+        log.debug("joining party...");
+        User user = (User) session.getAttribute("user");
+        log.debug("user={}, partyid={}",user,partyId);
+        try {
+            userService.joinParty(user.getUser_id(), partyId);
+        }
+        catch (RuntimeException e){
+            e.printStackTrace();
+            return "redirect:/user/partylist";
+        }
+        return "redirect:/user/partylist";
+    }
+
     @RequestMapping("logout")
     public String logout(HttpSession session){
 //        session.setAttribute("user", null);
@@ -34,10 +63,12 @@ public class UserController {
 
     @RequestMapping("myparty")
     public String myParty(Model model, HttpSession session){
+        log.debug("listing myparty...");
         User user = (User) session.getAttribute("user");
         log.debug("printing my party list... with user: {}", user);
-        List<Party> myParties = userService.listParty(user.getUser_id());
+        List<Party> myParties = userService.myParty(user.getUser_id());
         model.addAttribute("myparties", myParties);
+        log.debug("added successfully");
         return "myParty";
     }
 

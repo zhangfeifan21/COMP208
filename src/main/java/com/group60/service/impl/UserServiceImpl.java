@@ -1,20 +1,25 @@
 package com.group60.service.impl;
 
+import com.group60.controller.UserController;
 import com.group60.dao.UserDao;
+import com.group60.entity.CheckMember;
+import com.group60.entity.Pair;
 import com.group60.entity.Party;
 import com.group60.entity.User;
 import com.group60.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private UserDao userDao;
 
@@ -45,12 +50,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveParty(Party party, int user_id) {
+    public void saveParty(Party party, Integer user_id) {
         userDao.saveParty(party, user_id);
     }
 
     @Override
-    public List<Party> listParty(int user_id) {
-        return userDao.listParty(user_id);
+    public List<Party> myParty(Integer user_id) {
+        return userDao.myParty(user_id);
     }
+
+    @Override
+    public void joinParty(Integer user_id, Integer party_id) {
+        Pair pairDB = userDao.findPair(user_id, party_id);
+        if (!ObjectUtils.isEmpty(pairDB)) throw new RuntimeException("already joined that party");
+        CheckMember checkMember = userDao.checkParty(party_id);
+        log.debug("cur:{}, max{}",checkMember.getCurrent_member(),checkMember.getMax_member());
+        if (checkMember.getCurrent_member()==checkMember.getMax_member()) throw new RuntimeException("party is full");
+        userDao.addMember(party_id);
+        userDao.joinParty(user_id, party_id);
+    }
+
+    @Override
+    public void quitParty(Integer user_id, Integer party_id) {
+        Pair pairDB = userDao.findPair(user_id, party_id);
+        if (ObjectUtils.isEmpty(pairDB)) throw new RuntimeException("haven't join that party");
+        userDao.deleteMember(party_id);
+        userDao.quitParty(user_id, party_id);
+    }
+
 }

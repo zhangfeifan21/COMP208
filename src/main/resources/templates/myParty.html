@@ -46,39 +46,50 @@
                         date
                     </td>
                     <td>
-                        time
-                    </td>
-                    <td>
                         place
                     </td>
                     <td>
-                        current
+                        members
+                    </td>
+                    <td>
+                        holder_id
+                    </td>
+                    <td>
                     </td>
                 </tr>
-                <tr th:each="party,state:${myList}"  th:class="${state.odd?'row1':'row2'}">
+                <tr th:each="myparties,state:${myparties}"  th:class="${state.odd?'row1':'row2'}">
                     <td>
-                        <span th:text="${party.party_id}"></span>
+                        <span th:text="${myparties.party_id}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.title}"></span>
+                        <span th:text="${myparties.title}"></span>
                     </td>
                     <td>
-                        <span th:src="${party.description}" width="60"></span>
+                        <span th:text="${myparties.description}" th:width="60"></span>
                     </td>
                     <td>
-                        <span th:text="${#dates.format(party.date,'yyyy/MM/dd')}"></span>
+                        <span th:text="${#dates.format(myparties.start_time,'yyyy/MM/dd')}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.timer}"></span>
+                        <span th:text="${myparties.place}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.place}"></span>
+                        <span th:text="${myparties.current_member} + '/' + ${myparties.max_member}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.current} + '/' + ${party.maximum}"></span>
+                        <span th:text="${myparties.belongs_to}"></span>
+                    </td>
+                    <td>
+                        <a href="javascript:;" th:onclick="'quit('+${myparties.party_id}+')'">Quit</a>
                     </td>
                 </tr>
-
+                <script>
+                    function quit(partyId){
+                        if(window.confirm('Confirm to Quit')){
+                            location.href='[[@{/user/quitparty?partyId=}]]'+ partyId;
+                        }
+                    }
+                </script>
             </table>
         </div>
     </div>

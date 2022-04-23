@@ -1,9 +1,10 @@
 package com.group60.dao;
 
+import com.group60.entity.CheckMember;
+import com.group60.entity.Pair;
 import com.group60.entity.Party;
 import com.group60.entity.User;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -12,5 +13,11 @@ public interface UserDao {
     void saveUser(User user);
     List<Party> lists();
     void saveParty(@Param("party") Party party,@Param("user_id") int user_id);
-    List<Party> listParty(int user_id);
+    List<Party> myParty(Integer user_id);
+    void joinParty(@Param("user_id") Integer user_id, @Param("party_id") Integer party_id);
+    void quitParty(@Param("user_id") Integer user_id, @Param("party_id") Integer party_id);
+    Pair findPair(@Param("user_id") Integer user_id, @Param("party_id") Integer party_id);
+    void addMember(Integer party_id);
+    void deleteMember(Integer party_id);
+    CheckMember checkParty(Integer party_id);
 }
