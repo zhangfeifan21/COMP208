@@ -12,8 +12,10 @@
                 <p>
                     Group 60
                     <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
-                    <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a>
+                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a >
+                    <br />
+                    <a th:if="${session.user!=null}" th:href="@{/user/myparty}">Manage my party</a >
+                    <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a >
                 </p>
             </div>
             <div id="topheader">
@@ -80,16 +82,24 @@
                         <span th:text="${party.belongs_to}"></span>
                     </td>
                     <td>
-                        <p>
-                            <input type="button" class="button" value="add" onclick="joinParty()"/>
-                            <script>
-                                function joinParty(){
-                                    location.href = '[[@{/joinParty}]]';
-                                }
-                            </script>
-                        </p>
+                        <a href="javascript:;" th:onclick="'join('+${party.party_id} + ')'">Join</a>
+                        <a href="javascript:;" th:onclick="'quit('+${party.party_id}+')'">Quit</a>
                     </td>
                 </tr>
+                <script>
+                    function join(partyId){
+                        if(window.confirm('Confirm to Join')){
+                            location.href='[[@{/user/joinparty?partyId=}]]' + partyId;
+                        }
+                    }
+                </script>
+                <script>
+                    function quit(partyId){
+                        if(window.confirm('Confirm to Quit')){
+                            location.href='[[@{/user/quitparty?partyId=}]]'+ partyId;
+                        }
+                    }
+                </script>
             </table>
             <p>
                 <input type="button" class="button" value="add" onclick="addParty()"/>
