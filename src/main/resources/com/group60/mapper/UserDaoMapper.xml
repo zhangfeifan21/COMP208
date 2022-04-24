@@ -11,7 +11,7 @@
         values (#{user_id}, #{email_address}, #{password})
     </insert>
     <select id="lists" resultType="Party">
-        select party_id, title, description, max_member, current_member, place, start_time, belongs_to, users.email_address as holder_name
+        select party_id, title, parties.description, max_member, current_member, place, start_time, belongs_to, users.email_address as holder_name
         from `parties`, `users`
         where belongs_to = users.user_id
     </select>
@@ -72,4 +72,14 @@
         from `parties`
         where party_id = #{party_id};
     </delete>
+    <update id="saveDetail">
+        update `users`
+        set gender = #{detail.gender}, interests = #{detail.interests}, description = #{detail.description}, contact_mobile = #{detail.contact_mobile}, contact_email=#{detail.contact_email}
+        where user_id = #{user_id}
+    </update>
+    <select id="getDetail" parameterType="int" resultType="Detail">
+        select gender, interests, description, contact_mobile, contact_email
+        from `users`
+        where user_id = #{user_id}
+    </select>
 </mapper>

@@ -1,9 +1,6 @@
 package com.group60.dao;
 
-import com.group60.entity.CheckMember;
-import com.group60.entity.Pair;
-import com.group60.entity.Party;
-import com.group60.entity.User;
+import com.group60.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,4 +19,6 @@ public interface UserDao {
     CheckMember checkParty(Integer party_id);
     void emptyMember(Integer party_id);
     void dismissParty(Integer party_id);
+    void saveDetail(@Param("user_id") Integer user_id, @Param("detail") Detail detail);
+    Detail getDetail(Integer user_id);
 }

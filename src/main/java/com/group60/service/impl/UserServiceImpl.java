@@ -2,10 +2,7 @@ package com.group60.service.impl;
 
 import com.group60.controller.UserController;
 import com.group60.dao.UserDao;
-import com.group60.entity.CheckMember;
-import com.group60.entity.Pair;
-import com.group60.entity.Party;
-import com.group60.entity.User;
+import com.group60.entity.*;
 import com.group60.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -82,6 +80,16 @@ public class UserServiceImpl implements UserService {
     public void dismissParty(Integer party_id) {
         userDao.emptyMember(party_id);
         userDao.dismissParty(party_id);
+    }
+
+    @Override
+    public void saveDetail(Integer user_id, Detail detail) {
+        userDao.saveDetail(user_id, detail);
+    }
+
+    @Override
+    public Detail getDetail(Integer user_id) {
+        return userDao.getDetail(user_id);
     }
 
 }

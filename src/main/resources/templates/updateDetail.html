@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Update</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+</head>
+
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                Update Personal Information
+            </h1>
+            <form th:action="@{user/savedetail}" method="post">
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="form_table">
+                    <tr>
+                        <td valign="middle" align="right">
+                            Gender:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="gender" th:value = "${session.detail.gender}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Interests:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="interest" th:value = "${session.detail.getInterests()}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Description:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="description" th:value = "${session.detail.getDescription()}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Contact mobile:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="mobile" th:value = "${session.detail.getContact_mobile()}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Contact Email:
+                        </td>
+                        <td valign="middle" align="left">
+                            <input type="text" class="inputgri" name="email" th:value = "${session.detail.getContact_email()}"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>
+                    <input type="submit" class="button" value="Update &raquo;" />
+                    <a href="user/partylist">Go back</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

@@ -79,13 +79,18 @@
                         <span th:text="${party.current_member} + '/' + ${party.max_member}"></span>
                     </td>
                     <td>
-                        <span th:text="${party.getHolder_name()}"></span>
+                        <a href="javascript:" th:onclick="viewHolder([[${party.getBelongs_to()}]])" th:text="${party.getHolder_name()}"></a>
                     </td>
                     <td>
-                        <a th:if="${session.user.getUser_id() != party.getBelongs_to()}" href="javascript:;" th:onclick="'join('+${party.party_id} + ')'">Join</a>
-                        <a th:if="${session.user.getUser_id() == party.getBelongs_to()}">You are the holder</a>
+                        <a th:if="${session.user.getUser_id() != party.getBelongs_to()}" href="javascript:" th:onclick="'join('+${party.party_id} + ')'">Join</a>
+                        <span th:if="${session.user.getUser_id() == party.getBelongs_to()}">You are the holder</span>
                     </td>
                 </tr>
+                <script>
+                    function viewHolder(belongs_to){
+                        location.href='[[@{/user/viewholder?belongs_to=}]]'+belongs_to;
+                    }
+                </script>
                 <script>
                     function join(partyId){
                         if(window.confirm('Confirm to Join')){
@@ -102,6 +107,14 @@
                     }
                 </script>
             </p >
+            <div id="rightalign">
+                <input type="button" class="button" value="Update Detail" onclick="updateDetail()"/>
+                <script>
+                    function updateDetail(){
+                        location.href = '[[@{/updatedetail}]]';
+                    }
+                </script>
+            </div>
         </div>
     </div>
 </div>

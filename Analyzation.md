@@ -1,4 +1,9 @@
 ## module analyzation
+### error codes
+1. wrong password (login)
+2. invalid username (login)
+3. invalid username or already registed (register)
+4. invalid password
 
 ### user module
 

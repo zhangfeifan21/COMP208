@@ -1,5 +1,6 @@
 package com.group60.service;
 
+import com.group60.entity.Detail;
 import com.group60.entity.Party;
 import com.group60.entity.User;
 
@@ -14,4 +15,6 @@ public interface UserService {
     void joinParty(Integer user_id, Integer party_id);
     void quitParty(Integer user_id, Integer party_id);
     void dismissParty(Integer party_id);
+    void saveDetail(Integer user_id, Detail detail);
+    Detail getDetail(Integer user_id);
 }

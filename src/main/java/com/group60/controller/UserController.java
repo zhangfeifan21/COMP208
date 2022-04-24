@@ -1,5 +1,6 @@
 package com.group60.controller;
 
+import com.group60.entity.Detail;
 import com.group60.entity.Party;
 import com.group60.entity.User;
 import com.group60.service.UserService;
@@ -23,6 +24,21 @@ public class UserController {
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
+    }
+
+    @RequestMapping("savedetail")
+    public String saveDetail(Detail detail, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        int user_id = user.getUser_id();
+        log.debug("user_id: {} Got for save",user_id);
+        log.debug("updating details...");
+        userService.saveDetail(user_id, detail);
+        session.setAttribute("detail",detail);
+        return "redirect:/user/partylist";
+    }
+    @RequestMapping("viewholder")
+    public String viewHolder(){
+        return "personDetail";
     }
 
     @RequestMapping("dismissparty")
@@ -112,6 +128,8 @@ public class UserController {
         try {
             User user = userService.login(email_address, password);
             session.setAttribute("user",user);
+            Detail detail = userService.getDetail(user.getUser_id());
+            session.setAttribute("detail",detail);
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/register";
