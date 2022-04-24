@@ -24,6 +24,13 @@ public class UserController {
     public UserController(UserService userService){
         this.userService = userService;
     }
+
+    @RequestMapping("dismissparty")
+    public String dismissParty(Integer partyId){
+        log.debug("dismissing party...party_id={}",partyId);
+        userService.dismissParty(partyId);
+        return "redirect:/user/myparty";
+    }
     @RequestMapping("quitparty")
     public String quitParty(HttpSession session, Integer partyId){
         log.debug("quiting party");
@@ -34,9 +41,9 @@ public class UserController {
         }
         catch (RuntimeException e){
             e.printStackTrace();
-            return "redirect:/user/partylist";
+            return "redirect:/user/mylist";
         }
-        return "redirect:/user/partylist";
+        return "redirect:/user/myparty";
     }
 
     @RequestMapping("joinparty")

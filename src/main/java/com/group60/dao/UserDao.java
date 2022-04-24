@@ -20,4 +20,6 @@ public interface UserDao {
     void addMember(Integer party_id);
     void deleteMember(Integer party_id);
     CheckMember checkParty(Integer party_id);
+    void emptyMember(Integer party_id);
+    void dismissParty(Integer party_id);
 }

@@ -13,4 +13,5 @@ public interface UserService {
     List<Party> myParty(Integer user_id);
     void joinParty(Integer user_id, Integer party_id);
     void quitParty(Integer user_id, Integer party_id);
+    void dismissParty(Integer party_id);
 }

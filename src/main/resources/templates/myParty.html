@@ -52,7 +52,7 @@
                         members
                     </td>
                     <td>
-                        holder_id
+                        holder_name
                     </td>
                     <td>
                     </td>
@@ -77,16 +77,24 @@
                         <span th:text="${myparties.current_member} + '/' + ${myparties.max_member}"></span>
                     </td>
                     <td>
-                        <span th:text="${myparties.belongs_to}"></span>
+                        <span th:text="${myparties.getHolder_name()}"></span>
                     </td>
                     <td>
-                        <a href="javascript:;" th:onclick="'quit('+${myparties.party_id}+')'">Quit</a>
+                        <a th:if="${session.user.getUser_id() != myparties.belongs_to}" href="javascript:;" th:onclick="'quit('+${myparties.party_id}+')'">Quit</a>
+                        <a th:if="${session.user.getUser_id() == myparties.belongs_to}" href="javascript:;" th:onclick="'dismiss('+${myparties.party_id}+')'">Dismiss</a>
                     </td>
                 </tr>
                 <script>
                     function quit(partyId){
                         if(window.confirm('Confirm to Quit')){
                             location.href='[[@{/user/quitparty?partyId=}]]'+ partyId;
+                        }
+                    }
+                </script>
+                <script>
+                    function dismiss(partyId){
+                        if(window.confirm('Confirm to Dismiss')){
+                            location.href='[[@{/user/dismissparty?partyId=}]]'+ partyId;
                         }
                     }
                 </script>

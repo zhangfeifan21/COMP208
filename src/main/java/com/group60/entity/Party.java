@@ -1,6 +1,8 @@
 package com.group60.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Party {
@@ -11,12 +13,14 @@ public class Party {
     private int current_member;
     private String place;
     private int belongs_to;
+    private String holder_name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date start_time;
 
     public Party() {
     }
 
-    public Party(int party_id, String title, String description, int max_member, int current_member, String place, int belongs_to, Date start_time) {
+    public Party(int party_id, String title, String description, int max_member, int current_member, String place, int belongs_to, String holder_name, Date start_time) {
         this.party_id = party_id;
         this.title = title;
         this.description = description;
@@ -24,6 +28,7 @@ public class Party {
         this.current_member = current_member;
         this.place = place;
         this.belongs_to = belongs_to;
+        this.holder_name = holder_name;
         this.start_time = start_time;
     }
 
@@ -89,5 +94,13 @@ public class Party {
 
     public void setStart_time(Date start_time) {
         this.start_time = start_time;
+    }
+
+    public String getHolder_name() {
+        return holder_name;
+    }
+
+    public void setHolder_name(String holder_name) {
+        this.holder_name = holder_name;
     }
 }

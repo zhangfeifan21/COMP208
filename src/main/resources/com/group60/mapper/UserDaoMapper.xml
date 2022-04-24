@@ -11,18 +11,28 @@
         values (#{user_id}, #{email_address}, #{password})
     </insert>
     <select id="lists" resultType="Party">
-        select party_id, title, description, max_member, current_member, place, start_time, belongs_to
-        from `parties`
+        select party_id, title, description, max_member, current_member, place, start_time, belongs_to, users.email_address as holder_name
+        from `parties`, `users`
+        where belongs_to = users.user_id
     </select>
     <insert id="saveParty" useGeneratedKeys="true" keyProperty="party.party_id">
-        insert into `parties` (party_id, title, description, max_member, current_member, place, belongs_to)
-        values (#{party.party_id}, #{party.title}, #{party.description}, #{party.max_member}, '1', #{party.place}, #{user_id})
+        insert into `parties` (party_id, title, description, max_member, current_member, place, start_time, belongs_to)
+        values (#{party.party_id}, #{party.title}, #{party.description}, #{party.max_member}, '1', #{party.place}, #{party.start_time}, #{user_id})
     </insert>
     <select id="myParty" parameterType="int" resultType="Party">
-        select p.party_id, title, description, max_member, current_member, place, start_time, belongs_to
-        from `parties` as p, `users_parties` as up, `users` as u
-        where u.user_id = #{user_id} and u.user_id = up.user_id and p.party_id = up.party_id
-        order by p.party_id
+        select tmp.party_id, tmp.title, tmp.description, tmp.max_member, tmp.current_member, tmp.place, tmp.start_time, tmp.belongs_to, users.email_address as holder_name
+        from (
+                 select p.party_id as party_id, title, description, max_member, current_member, place, start_time, belongs_to
+                 from `parties` as p, `users_parties` as up, `users` as u
+                 where u.user_id = #{user_id} and u.user_id = up.user_id and p.party_id = up.party_id
+                 union
+                 select party_id as party_id, title, description, max_member, current_member, place, start_time, belongs_to
+                 from `parties`
+                 where belongs_to = #{user_id}
+
+             ) tmp, users
+        where tmp.belongs_to = users.user_id
+        order by party_id
     </select>
     <select id="findPair" resultType="Pair">
         select *
@@ -51,5 +61,15 @@
     <delete id="quitParty">
         delete from `users_parties`
         where user_id = #{user_id} and party_id = #{party_id};
+    </delete>
+    <delete id="emptyMember" parameterType="int">
+        delete
+        from `users_parties`
+        where party_id = #{party_id};
+    </delete>
+    <delete id="dismissParty" parameterType="int">
+        delete
+        from `parties`
+        where party_id = #{party_id};
     </delete>
 </mapper>

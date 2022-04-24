@@ -78,4 +78,10 @@ public class UserServiceImpl implements UserService {
         userDao.quitParty(user_id, party_id);
     }
 
+    @Override
+    public void dismissParty(Integer party_id) {
+        userDao.emptyMember(party_id);
+        userDao.dismissParty(party_id);
+    }
+
 }
