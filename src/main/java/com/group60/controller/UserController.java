@@ -37,8 +37,14 @@ public class UserController {
         return "redirect:/user/partylist";
     }
     @RequestMapping("viewholder")
-    public String viewHolder(){
-        return "personDetail";
+    public String viewHolder(Model model, Integer belongs_to){
+        log.debug("view called with id:{}",belongs_to);
+        Detail detail = userService.getDetail(belongs_to);
+        log.debug("detail:{}",detail);
+        model.addAttribute("detail", detail);
+        log.debug("detail added to model");
+        log.debug("model:{}",model.getAttribute("detail"));
+        return "holderInfo";
     }
 
     @RequestMapping("dismissparty")

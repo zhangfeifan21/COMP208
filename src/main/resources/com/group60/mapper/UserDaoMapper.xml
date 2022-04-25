@@ -78,7 +78,7 @@
         where user_id = #{user_id}
     </update>
     <select id="getDetail" parameterType="int" resultType="Detail">
-        select gender, interests, description, contact_mobile, contact_email
+        select gender, interests, description, contact_mobile, contact_email, email_address
         from `users`
         where user_id = #{user_id}
     </select>

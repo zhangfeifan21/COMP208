@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>HolderInfo</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+</head>
+
+<body>
+<div id="wrap">
+    <div id="top_content">
+        <div id="header">
+            <div id="rightheader">
+                <p>
+                    Group 60
+                    <br />
+                </p>
+            </div>
+            <div id="topheader">
+                <h1 id="title">
+                    <a href="#">Linker</a>
+                </h1>
+            </div>
+            <div id="navigation">
+            </div>
+        </div>
+        <div id="content">
+            <p id="whereami">
+            </p>
+            <h1>
+                Hi! I'm <span th:text="${detail.getEmail_address()}"></span>
+            </h1>
+                <table cellpadding="0" cellspacing="0" border="0"
+                       class="form_table">
+                    <tr>
+                        <td valign="middle" align="right">
+                            Gender: <span th:text="${detail.getGender()}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Interests: <span th:text="${detail.interests}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Description: <span th:text="${detail.description}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Contact mobile: <span th:text="${detail.contact_mobile}"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="middle" align="right">
+                            Contact Email: <span th:text="${detail.contact_email}"></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <p>
+                    <a th:href="@{/user/partylist}">Go back</a>
+                </p>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

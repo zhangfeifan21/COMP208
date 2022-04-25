@@ -91,5 +91,4 @@ public class UserServiceImpl implements UserService {
     public Detail getDetail(Integer user_id) {
         return userDao.getDetail(user_id);
     }
-
 }

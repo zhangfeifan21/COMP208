@@ -1,16 +1,30 @@
 package com.group60.entity;
 
 public class Detail {
+    private String email_address;
     private String gender;
     private String interests;
     private String description;
     private String contact_mobile;
     private String contact_email;
 
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "email_address='" + email_address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", interests='" + interests + '\'' +
+                ", description='" + description + '\'' +
+                ", contact_mobile='" + contact_mobile + '\'' +
+                ", contact_email='" + contact_email + '\'' +
+                '}';
+    }
+
     public Detail() {
     }
 
-    public Detail(String gender, String interests, String description, String contact_mobile, String contact_email) {
+    public Detail(String email_address, String gender, String interests, String description, String contact_mobile, String contact_email) {
+        this.email_address = email_address;
         this.gender = gender;
         this.interests = interests;
         this.description = description;
@@ -56,5 +70,13 @@ public class Detail {
 
     public void setContact_email(String contact_email) {
         this.contact_email = contact_email;
+    }
+
+    public String getEmail_address() {
+        return email_address;
+    }
+
+    public void setEmail_address(String email_address) {
+        this.email_address = email_address;
     }
 }
