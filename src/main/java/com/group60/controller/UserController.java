@@ -115,13 +115,13 @@ public class UserController {
         try {
             if (party.getTitle().isEmpty()) throw new RuntimeException("title cannot be null");
             if (party.getDescription().isEmpty()) throw new RuntimeException("description cannot be null");
-            if (party.getMax_member()==0) throw new RuntimeException("max members cannot be null");
+            if (party.getMax_member()<=2) throw new RuntimeException("max members cannot be null");
 //            if (party.getStart_time().toString().isEmpty()) throw new RuntimeException("start time cannot be null");
             if (party.getPlace().isEmpty()) throw new RuntimeException("place cannot be null");
             userService.saveParty(party, user_id);
         } catch (RuntimeException e){
             e.printStackTrace();
-            return "redirect:/saveparty";
+            return "redirect:/addParty";
         }
         return "redirect:/user/partylist";
     }
@@ -143,7 +143,7 @@ public class UserController {
             session.setAttribute("detail",detail);
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/register";
+            return "redirect:/";
         }
         return "redirect:/user/partylist";
     }

@@ -14,7 +14,7 @@
                     <br />
                     <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a >
                     <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/myparty}">Manage my party</a >
+                    <a th:if="${session.user!=null}" th:href="@{/updatedetail}">Update my details</a >
                     <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a >
                 </p>
             </div>
@@ -106,15 +106,13 @@
                         location.href = '[[@{/addParty}]]';
                     }
                 </script>
-            </p >
-            <div id="rightalign">
-                <input type="button" class="button" value="Update Detail" onclick="updateDetail()"/>
+                <input type="button" class="button" value="Manage my party" onclick="manageParty()"/>
                 <script>
-                    function updateDetail(){
-                        location.href = '[[@{/updatedetail}]]';
+                    function manageParty(){
+                        location.href = '[[@{/myparty}]]';
                     }
                 </script>
-            </div>
+            </p >
         </div>
     </div>
 </div>
