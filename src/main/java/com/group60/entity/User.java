@@ -4,14 +4,26 @@ public class User {
     private Integer user_id;
     private String email_address;
     private String password;
+    private String verification_code;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "user_id=" + user_id +
+                ", email_address='" + email_address + '\'' +
+                ", password='" + password + '\'' +
+                ", verification_code='" + verification_code + '\'' +
+                '}';
+    }
 
     public User() {
     }
 
-    public User(Integer user_id, String email_address, String password) {
+    public User(Integer user_id, String email_address, String password, String verification_code) {
         this.user_id = user_id;
         this.email_address = email_address;
         this.password = password;
+        this.verification_code = verification_code;
     }
 
     public Integer getUser_id() {
@@ -38,12 +50,11 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "user_id=" + user_id +
-                ", email_address='" + email_address + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getVerification_code() {
+        return verification_code;
+    }
+
+    public void setVerification_code(String verification_code) {
+        this.verification_code = verification_code;
     }
 }

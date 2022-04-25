@@ -4,6 +4,17 @@ server:
   port: 8081
 
 spring:
+  mail:
+    host: smtp.qq.com
+    port: 465
+    protocol: smtp
+    username: 1426107672@qq.com
+    password: wryiblcanwqfjjgj
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
   thymeleaf:
     cache: false
     prefix: classpath:/templates/

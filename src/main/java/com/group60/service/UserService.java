@@ -17,4 +17,6 @@ public interface UserService {
     void dismissParty(Integer party_id);
     void saveDetail(Integer user_id, Detail detail);
     Detail getDetail(Integer user_id);
+    void setCode(String email_address, String code);
+    String getCode(String email_address);
 }

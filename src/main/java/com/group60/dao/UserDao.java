@@ -21,4 +21,6 @@ public interface UserDao {
     void dismissParty(Integer party_id);
     void saveDetail(@Param("user_id") Integer user_id, @Param("detail") Detail detail);
     Detail getDetail(Integer user_id);
+    void setCode(@Param("email_address") String email_address, @Param("code") String code);
+    String getCode(String email_address);
 }

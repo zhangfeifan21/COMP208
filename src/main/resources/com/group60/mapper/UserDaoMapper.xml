@@ -6,10 +6,12 @@
         select email_address, password, user_id from `users`
         where email_address = #{email_address}
     </select>
+
     <insert id="saveUser" parameterType="User" useGeneratedKeys="true" keyProperty="user_id">
         insert into `users` (user_id, email_address, password)
         values (#{user_id}, #{email_address}, #{password})
     </insert>
+
     <select id="lists" resultType="Party">
         select party_id, title, parties.description, max_member, current_member, place, start_time, belongs_to, users.email_address as holder_name
         from `parties`, `users`
@@ -81,5 +83,14 @@
         select gender, interests, description, contact_mobile, contact_email, email_address
         from `users`
         where user_id = #{user_id}
+    </select>
+    <insert id="setCode" useGeneratedKeys="true" keyProperty="user_id">
+        insert into `users` (user_id, email_address, verification_code)
+        values (#{user_id}, #{email_address}, #{code})
+    </insert>
+    <select id="getCode" parameterType="String" resultType="String">
+        select verification_code
+        from `users`
+        where email_address = #{email_address}
     </select>
 </mapper>

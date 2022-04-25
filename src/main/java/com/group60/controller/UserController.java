@@ -3,12 +3,15 @@ package com.group60.controller;
 import com.group60.entity.Detail;
 import com.group60.entity.Party;
 import com.group60.entity.User;
+import com.group60.service.MailService;
 import com.group60.service.UserService;
+import com.group60.utils.MailUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -20,9 +23,11 @@ public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
+    private MailService mailService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, MailService mailService){
+        this.mailService = mailService;
         this.userService = userService;
     }
 
@@ -145,16 +150,27 @@ public class UserController {
 
     @RequestMapping("register")
     public String register(User user, String confirmPwd){
-        log.debug("email_address: {},password: {}",user.getEmail_address(),user.getPassword());
+        log.debug("email_address: {},password: {},code: {}",user.getEmail_address(),user.getPassword(),user.getVerification_code());
         log.debug("confirmPwd: {}",confirmPwd);
         try {
             if(user.getPassword().isEmpty()) throw new RuntimeException("please enter password");
             if(!user.getPassword().equals(confirmPwd)) throw new RuntimeException("password mismatched");
+//            if(user.getVerification_code().length()!=4) throw new RuntimeException("wrong format of code");
+//            String code = userService.getCode(user.getEmail_address());
+//            if(!user.getVerification_code().equals(code)) throw new RuntimeException("wrong code");
             userService.register(user);
         } catch (RuntimeException e) {
             e.printStackTrace();
             return "redirect:/register";
         }
         return "redirect:/login";
+    }
+
+    @RequestMapping("sendcode")
+    public void sendCode(User user){
+        log.debug("addr: {}", user.getEmail_address());
+        String code = MailUtil.getCode(4);
+        mailService.sendEmail(user.getEmail_address(),code);
+        userService.setCode(user.getEmail_address(), code);
     }
 }

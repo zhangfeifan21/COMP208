@@ -91,4 +91,16 @@ public class UserServiceImpl implements UserService {
     public Detail getDetail(Integer user_id) {
         return userDao.getDetail(user_id);
     }
+
+    @Override
+    public void setCode(String email_address, String code) {
+        userDao.setCode(email_address,code);
+    }
+
+    @Override
+    public String getCode(String email_address) {
+        String code = userDao.getCode(email_address);
+        if (ObjectUtils.isEmpty(code)) throw new RuntimeException("haven't send the code");
+        return code;
+    }
 }
