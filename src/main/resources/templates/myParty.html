@@ -1,41 +1,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>list</title>
+    <title>myParty</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
+
+
 <body>
-<div id="wrap">
+<video autoplay muted loop th:poster="@{/asset/first_frame.jpg}" id="bgvid">
+    <source th:src="@{/asset/sea.mp4}" type="video/mp4"> </video>
+<div class="fixedElement">
+		<div id="rightheader">
+			<p>
+				Group 60
+				<br />
+				<a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
+			</p>
+		</div>
+		<div id="topheader">
+			<h1 id="title">
+				<a href="#">Linker</a><br>
+				<p class="message">View your party:)</p>
+			</h1>
+		</div>
+		
+	</div>	
+	
+	
+<div id="wrap2">
     <div id="top_content">
-        <div id="header">
-            <div id="rightheader">
-                <p>
-                    Group 60
-                    <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a>
-                    <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/partylist}">Back to party list</a>
-                </p>
-            </div>
-            <div id="topheader">
-                <h1 id="title">
-                    <a href="#">Linker</a>
-                </h1>
-            </div>
-            <div id="navigation">
-            </div>
-        </div>
         <div id="content">
-            <p id="whereami">
-            </p>
             <h1>
                 <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>'s parties !
             </h1>
             <table class="table">
                 <tr class="table_header">
-                    <td>
-                        party_id
-                    </td>
                     <td>
                         title
                     </td>
@@ -59,9 +58,6 @@
                 </tr>
                 <tr th:each="myparties,state:${myparties}"  th:class="${state.odd?'row1':'row2'}">
                     <td>
-                        <span th:text="${myparties.party_id}"></span>
-                    </td>
-                    <td>
                         <span th:text="${myparties.title}"></span>
                     </td>
                     <td>
@@ -82,7 +78,7 @@
                     <td>
                         <a th:if="${session.user.getUser_id() != myparties.belongs_to}" href="javascript:;" th:onclick="'quit('+${myparties.party_id}+')'">Quit</a>
                         <a th:if="${session.user.getUser_id() == myparties.belongs_to}" href="javascript:;" th:onclick="'dismiss('+${myparties.party_id}+')'">Dismiss</a>
-                    </td>
+                   </td>
                 </tr>
                 <script>
                     function quit(partyId){
@@ -90,8 +86,8 @@
                             location.href='[[@{/user/quitparty?partyId=}]]'+ partyId;
                         }
                     }
-                </script>
-                <script>
+                </script>               
+                 <script>
                     function dismiss(partyId){
                         if(window.confirm('Confirm to Dismiss')){
                             location.href='[[@{/user/dismissparty?partyId=}]]'+ partyId;
@@ -99,6 +95,12 @@
                     }
                 </script>
             </table>
+            <button class="button" onclick="back()">Back to party list</button>
+            <script>
+                function back(){
+                    location.href = '[[@{/user/partylist}]]';
+                }
+            </script>
         </div>
     </div>
 </div>

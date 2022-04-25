@@ -1,117 +1,117 @@
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>list</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-</head>
-<body>
-<div id="wrap">
-    <div id="top_content">
-        <div id="header">
-            <div id="rightheader">
-                <p>
-                    Group 60
-                    <br />
-                    <a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a >
-                    <br />
-                    <a th:if="${session.user!=null}" th:href="@{/updatedetail}">Update my details</a >
-                    <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a >
-                </p>
-            </div>
-            <div id="topheader">
-                <h1 id="title">
-                    <a href="#">Linker</a>
-                </h1>
-            </div>
-            <div id="navigation">
-            </div>
-        </div>
-        <div id="content">
-            <p id="whereami">
-            </p>
-            <h1>
-                Welcome <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>
-                <span th:if="${session.user==null}" >Guest (Please sign in first)</span>!
-            </h1>
-            <table class="table">
-                <tr class="table_header">
-                    <td>
-                        party_id
-                    </td>
-                    <td>
-                        title
-                    </td>
-                    <td>
-                        description
-                    </td>
-                    <td>
-                        date
-                    </td>
-                    <td>
-                        place
-                    </td>
-                    <td>
-                        members
-                    </td>
-                    <td>
-                        holder_name
-                    </td>
-                    <td>
-                    </td>
-                </tr>
-                <tr th:each="party,state:${parties}"  th:class="${state.odd?'row1':'row2'}">
-                    <td>
-                        <span th:text="${party.party_id}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${party.title}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${party.description}" th:width="60"></span>
-                    </td>
-                    <td>
-                        <span th:text="${#dates.format(party.start_time,'yyyy/MM/dd')}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${party.place}"></span>
-                    </td>
-                    <td>
-                        <span th:text="${party.current_member} + '/' + ${party.max_member}"></span>
-                    </td>
-                    <td>
-                        <a href="javascript:" th:onclick="viewHolder([[${party.getBelongs_to()}]])" th:text="${party.getHolder_name()}"></a>
-                    </td>
-                    <td>
-                        <a th:if="${session.user.getUser_id() != party.getBelongs_to()}" href="javascript:" th:onclick="'join('+${party.party_id} + ')'">Join</a>
-                        <span th:if="${session.user.getUser_id() == party.getBelongs_to()}">You are the holder</span>
-                    </td>
-                </tr>
-                <script>
-                    function viewHolder(belongs_to){
-                        location.href='[[@{/user/viewholder?belongs_to=}]]'+belongs_to;
-                    }
-                </script>
-                <script>
-                    function join(partyId){
-                        if(window.confirm('Confirm to Join')){
-                            location.href='[[@{/user/joinparty?partyId=}]]' + partyId;
-                        }
-                    }
-                </script>
+	<head>
+		<title>list</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"  />
+	</head>
+	
+	
+	<body>
+	<video autoplay muted loop th:poster="@{/asset/first_frame.jpg}" id="bgvid">
+		<source th:src="@{/asset/sea.mp4}" type="video/mp4"> </video>
+	<div class="fixedElement">
+		<div id="rightheader">
+			<p>
+				Group 60
+				<br />
+				<a th:if="${session.user!=null}" th:href="@{/user/logout}">Click here to quit</a >
+				<br/>
+				 <a th:if="${session.user!=null}" th:href="@{/updatedetail}">Update my details</a >
+                 <a th:if="${session.user==null}" th:href="@{/login}">Click here to Sign in</a >
+			</p>
+		</div>
+		<div id="topheader">
+			<h1 id="title">
+				<a href="#">Linker</a><br>
+				<p class="message">Join a new party:)</p>
+			</h1>
+		</div>
+
+	</div>
+
+		<div id="wrap1">
+			<div id="top_content">
+				<div id="content">
+					<h1>
+						Welcome <span th:if="${session.user!=null}" th:text="${session.user.getEmail_address()}"></span>
+						<span th:if="${session.user==null}">Guest (Please sign in first)</span>!
+					</h1>
+					<table class="table">
+						<tr class="table_header">
+							<td>
+								title
+							</td>
+							<td>
+								description
+							</td>
+							<td>
+								date
+							</td>
+							<td>
+								place
+							</td>
+							<td>
+								members
+							</td>
+							<td>
+								holder_name
+							</td>
+							<td>
+							</td>
+						</tr>
+						<tr th:each="party,state:${parties}"  th:class="${state.odd?'row1':'row2'}">
+						    <td>
+						        <span th:text="${party.title}"></span>
+						    </td>
+						    <td>
+						        <span th:text="${party.description}" th:width="60"></span>
+						    </td>
+						    <td>
+						        <span th:text="${#dates.format(party.start_time,'yyyy/MM/dd')}"></span>
+						    </td>
+						    <td>
+						        <span th:text="${party.place}"></span>
+						    </td>
+						    <td>
+						        <span th:text="${party.current_member} + '/' + ${party.max_member}"></span>
+						    </td>
+						    <td>
+								<a href="javascript:" th:onclick="viewHolder([[${party.getBelongs_to()}]])" th:text="${party.getHolder_name()}"></a>
+							</td>
+							<td>
+								<a th:if="${session.user.getUser_id() != party.getBelongs_to()}" href="javascript:" th:onclick="'join('+${party.party_id} + ')'">Join</a>
+								<span th:if="${session.user.getUser_id() == party.getBelongs_to()}">You are the holder</span>
+							</td>
+						</tr>
+						<script>
+							function viewHolder(belongs_to){
+								location.href='[[@{/user/viewholder?belongs_to=}]]'+belongs_to;
+							}
+						</script>
+						<script>
+						    function join(partyId){
+						        if(window.confirm('Confirm to Join')){
+						            location.href='[[@{/user/joinparty?partyId=}]]' + partyId;
+						        }
+						    }
+						</script>
             </table>
-            <p>
-                <input type="button" class="button" value="add" onclick="addParty()"/>
-                <script>
-                    function addParty(){
-                        location.href = '[[@{/addParty}]]';
-                    }
-                </script>
-                <input type="button" class="button" value="Manage my party" onclick="manageParty()"/>
-                <script>
-                    function manageParty(){
-                        location.href = '[[@{/myparty}]]';
-                    }
-                </script>
+            <p style="text-align:center">
+				<button class="button" onclick="addParty()">Add new Party</button>
+
+				<script>
+				                    function addParty(){
+				                        location.href = '[[@{/addParty}]]';
+				                    }
+				</script>
+				<button class="button" onclick="manageParty()">Manage my party</button>
+
+				                <script>
+				                    function manageParty(){
+				                        location.href = '[[@{/user/myparty}]]';
+				                    }
+				                </script>
+
             </p >
         </div>
     </div>

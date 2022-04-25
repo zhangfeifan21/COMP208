@@ -3,31 +3,34 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Update</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 
 <body>
-<div id="wrap">
+<video autoplay muted loop th:poster="@{/asset/first_frame.jpg}" id="bgvid">
+    <source th:src="@{/asset/sea.mp4}" type="video/mp4"> </video>
+<div class="fixedElement">
+		<div id="rightheader">
+			<p>
+				Group 60
+			</p>
+		</div>
+		<div id="topheader">
+			<h1 id="title">
+				<a href="#">Linker</a><br>
+				<p class="message">Update your personal details:)</p>
+			</h1>
+		</div>
+		
+	</div>
+	
+	
+	
+<div id="wrap4">
     <div id="top_content">
-        <div id="header">
-            <div id="rightheader">
-                <p>
-                    Group 60
-                    <br />
-                </p>
-            </div>
-            <div id="topheader">
-                <h1 id="title">
-                    <a href="#">Linker</a>
-                </h1>
-            </div>
-            <div id="navigation">
-            </div>
-        </div>
+        
         <div id="content">
-            <p id="whereami">
-            </p>
-            <h1>
+            <h1 style="text-align:center">
                 Update Personal Information
             </h1>
             <form th:action="@{user/savedetail}" method="post">
@@ -46,7 +49,7 @@
                             Interests:
                         </td>
                         <td valign="middle" align="left">
-                            <input type="text" class="inputgri" name="interest" th:value = "${session.detail.getInterests()}"/>
+                            <input type="text" class="inputgri" name="interests" th:value = "${session.detail.interests}"/>
                         </td>
                     </tr>
                     <tr>
@@ -54,7 +57,7 @@
                             Description:
                         </td>
                         <td valign="middle" align="left">
-                            <input type="text" class="inputgri" name="description" th:value = "${session.detail.getDescription()}"/>
+                            <input type="text" class="inputgri" name="description" th:value = "${session.detail.description}"/>
                         </td>
                     </tr>
                     <tr>
@@ -62,7 +65,7 @@
                             Contact mobile:
                         </td>
                         <td valign="middle" align="left">
-                            <input type="text" class="inputgri" name="mobile" th:value = "${session.detail.getContact_mobile()}"/>
+                            <input type="text" class="inputgri" name="contact_mobile" th:value = "${session.detail.contact_mobile}"/>
                         </td>
                     </tr>
                     <tr>
@@ -70,13 +73,14 @@
                             Contact Email:
                         </td>
                         <td valign="middle" align="left">
-                            <input type="text" class="inputgri" name="email" th:value = "${session.detail.getContact_email()}"/>
+                            <input type="text" class="inputgri" name="contact_email" th:value = "${session.detail.contact_email}"/>
                         </td>
                     </tr>
                 </table>
 
-                <p>
-                    <input type="submit" class="button" value="Update &raquo;" />
+                <p style="text-align:center">
+					<button type="submit" id="button_lzh">Update</button>
+					<br>
                     <a href="user/partylist">Go back</a>
                 </p>
             </form>

@@ -3,31 +3,33 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Menu</title>
-    <link rel="stylesheet" type="text/css" href="css/style1.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 
 </head>
 
 <body>
-<video autoplay muted loop poster="asset/first_frame.jpg" id="bgvid">
-<source th:src="@{asset/sea.mp4}" type="video/mp4"> </video>
- 
+<video autoplay muted loop th:poster="@{/asset/first_frame.jpg}" id="bgvid">
+    <source th:src="@{/asset/sea.mp4}" type="video/mp4"> </video>
+<div class="fixedElement">
+		<div id="rightheader">
+			<p>
+				Group 60
+			</p>
+		</div>
+		<div id="topheader">
+			<h1 id="title">
+				<a href="#">Linker</a><br>
+				<p class="message">Join party and meet friends:)</p>
+			</h1>
+		</div>
+		
+	</div>
+
+
+	
 <div id="wrap">
     <div id="top_content">
-        <div id="header">
-            <div id="rightheader">
-                <p>
-                    Group 60
-                    <br/>
-                </p >
-            </div>
-            <div id="topheader">
-                <h1 id="title">
-                    <a href=" ">Linker</a >
-                </h1>
-            </div>
-            <div id="navigation">
-            </div>
-        </div>
+       
         <div id="content" style="text-align:center;vertical-align:middle;">
             <br>
             <h1 style="text-align:center">
@@ -37,7 +39,12 @@
                
                 <input type="text" class="inputgri" name="email_address" placeholder="username"/>          
                 <br>
-    <input type="password" class="inputgri" name="password" placeholder="password"/>
+				<input type="password" class="inputgri" name="password" placeholder="password"/>
                 <br>
-    <button type="submit">login</button>      
-    <p class="message">Not registered? <a href="register">Create an account</a >
+				<button type="submit">login</button>      
+				<p class="message">Not registered? <a href="register">Create an account</a></p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

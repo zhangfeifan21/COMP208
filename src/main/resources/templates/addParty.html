@@ -1,33 +1,38 @@
-<html xmlns:th="http://www.thymealf.org">
+<html lang="en" xmlns:th="http://www.thymealf.org">
 <head>
     <title>addParty</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" type="text/css"
-          href="css/style.css" />
+          th:href="@{/css/style.css}" />
 </head>
 
 <body>
-<div id="wrap">
+<video autoplay muted loop th:poster="@{/asset/first_frame.jpg}" id="bgvid">
+    <source th:src="@{/asset/sea.mp4}" type="video/mp4"> </video>
+<div class="fixedElement">
+		<div id="rightheader">
+			<p>
+				Group 60
+			</p>
+		</div>
+		<div id="topheader">
+			<h1 id="title">
+				<a href="#">Linker</a><br>
+				<p class="message">Hold a party:)!</p>
+			</h1>
+		</div>
+		
+	</div>
+
+
+
+
+
+<div id="wrap3">
     <div id="top_content">
-        <div id="header">
-            <div id="rightheader">
-                <p>
-                    Group 60
-                    <br />
-                </p>
-            </div>
-            <div id="topheader">
-                <h1 id="title">
-                    <a href="#">Linker</a>
-                </h1>
-            </div>
-            <div id="navigation">
-            </div>
-        </div>
+        
         <div id="content">
-            <p id="whereami">
-            </p>
-            <h1>
+            <h1 style="text-align:center">
                 Hold a party!
             </h1>
             <form th:action="@{user/saveparty}" method="post" enctype="multipart/form-data">
@@ -74,8 +79,9 @@
                         </td>
                     </tr>
                 </table>
-                <p>
-                    <input type="submit" class="button" value="Create" />
+                <p style="text-align:center">
+					<button type="submit" id="button_lzh"> Add</button>
+					<br/>
                     <a href="user/partylist">Go back</a>
                 </p>
             </form>
