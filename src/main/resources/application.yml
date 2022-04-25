@@ -1,6 +1,7 @@
 server:
   servlet:
     context-path: /comp208-group60
+  port: 8081
 
 spring:
   thymeleaf:
@@ -10,9 +11,9 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/COMP208-database?characterEncoding=utf-8
-    username: root
-    password: 171737173Wo01
+    url: jdbc:mysql://45.62.123.144:3306/comp208?characterEncoding=utf-8
+    username: COMP208
+    password: mT8RCCeZbPsT2XjE
   mvc:
     hiddenmethod:
       filter:
